@@ -1,53 +1,95 @@
+// 문제 : 아래가 실행되도록 해주세요.
+// 조건 : 배열을 사용할 수 없습니다.
 class Main {
     public static void main(String[] args) {
-        전사 a전사1 = new 전사();
+        사람인력관리소 a사람인력관리소 = new 사람인력관리소();
 
-        a전사1.a왼손무기 = new 칼();
-        a전사1.공격();
-        // 출력 => 전사가 왼손으로 칼(을)를 사용합니다.
+        a사람인력관리소.add사람("홍길순", 33);
+        // 나이가 33살인 1번째 사람(홍길순)이 추가되었습니다.
+        a사람인력관리소.add사람("홍길동", 20);
+        // 나이가 20살인 2번째 사람(홍길동)이 추가되었습니다.
+        a사람인력관리소.add사람("임꺽정", 30);
+        // 나이가 30살인 3번째 사람(임꺽정)이 추가되었습니다.
+        a사람인력관리소.add사람("김동현", 25);
+        // 나이가 20살인 2번째 사람(홍길동)이 추가되었습니다.
+        a사람인력관리소.add사람("장강사", 30);
+        // 나이가 30살인 3번째 사람(임꺽정)이 추가되었습니다.
 
-        전사 a전사2 = new 전사();
-        a전사2.a왼손무기 = new 창();
-        a전사2.a오른손무기 = new 도끼();
-        a전사2.공격();
-        // 출력 => 전사가 왼손으로 창(을)를 사용합니다.
-        // 출력 => 전사가 오른손으로 도끼(을)를 사용합니다.
+        사람 a사람1 = a사람인력관리소.get사람(1);
+        a사람1.자기소개();
+        // 저는 1번, 홍길순, 33살 입니다.
+
+        사람 a사람2 = a사람인력관리소.get사람(2);
+        a사람2.자기소개();
+        // 저는 2번, 홍길동, 20살 입니다.
+
+        사람 a사람3 = a사람인력관리소.get사람(3);
+        a사람3.자기소개();
+        // 저는 3번, 임꺽정, 30살 입니다.
+
+        사람 a사람4 = a사람인력관리소.get사람(4);
+        a사람4.자기소개();
+        // 저는 3번, 임꺽정, 30살 입니다.
+
+        사람 a사람5 = a사람인력관리소.get사람(5);
+        a사람5.자기소개();
+        // 저는 3번, 임꺽정, 30살 입니다.
     }
 }
-class 전사{
-    무기 a왼손무기;
-    무기 a오른손무기;
 
-    void 공격(){
+class 사람인력관리소{
 
-        if(a왼손무기 != null && a오른손무기 != null){
-            a왼손무기.작동("왼손");
-            a오른손무기.작동("오른손");
-        }else if(a왼손무기 != null)
-            a왼손무기.작동("왼손");
-        else
-            a오른손무기.작동("오른손");
+    사람 사람;
+    int cnt = 1;
+
+    void add사람(String name, int age){
+
+        if(cnt == 1){
+            사람 = new 사람();
+            this.사람.name = name;
+            this.사람.age = age;
+            this.사람.num = cnt;
+        }else{
+
+            사람 다음사람 = new 사람();
+            다음사람.name = name;
+            다음사람.age = age;
+            다음사람.num = cnt;
+
+            사람 마지막사람 = new 사람();
+            마지막사람 = 사람;
+            for(int i = 2 ; i < cnt ; i++){
+                마지막사람 = 마지막사람.다음사람;
+            }
+
+            마지막사람.다음사람 = 다음사람;
+//            System.out.println("마지막사람 이름 = " + 마지막사람.name);
+//            System.out.println("다음사람 이름 = " + 마지막사람.다음사람.name);
+        }
+
+
+        // 나이가 33살인 1번째 사람(홍길순)이 추가되었습니다.
+        System.out.printf("나이가 %d살인 %d번째 사람(%s)이 추가되었습니다.\n", age, cnt, name);
+        cnt++;
+
+    }
+
+    사람 get사람(int num){
+        사람 result = new 사람();
+        result = 사람;
+        for(int i = 1 ; i < num ; i++){
+            result = result.다음사람;
+        }
+        return result;
     }
 }
-abstract class 무기{
-    abstract void 작동(String 손);
-}
-
-class 칼 extends 무기{
-    @Override
-    void 작동(String 손) {
-        System.out.printf("전사가 %s 으로 칼(을)를 사용합니다.\n",손);
-    }
-}
-class 창 extends 무기{
-    @Override
-    void 작동(String 손) {
-        System.out.printf("전사가 %s 으로 창(을)를 사용합니다.\n",손);
-    }
-}
-class 도끼 extends 무기{
-    @Override
-    void 작동(String 손) {
-        System.out.printf("전사가 %s 으로 도끼(을)를 사용합니다.\n",손);
+class 사람{
+    String name;
+    int age;
+    int num;
+    사람 다음사람;
+    // 저는 3번, 임꺽정, 30살 입니다.
+    void 자기소개(){
+        System.out.printf("저는 %d번, %s, %d살 입니다.\n", num, name, age);
     }
 }
