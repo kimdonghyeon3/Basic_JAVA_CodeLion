@@ -1,36 +1,26 @@
-import java.util.*;
-import java.util.stream.*;
+// 문제 : 아래가 오류없이 실행되도록 해주세요.
+// 조건 : 사람 클래스만 수정할 수 있습니다.
 
 class Main {
     public static void main(String[] args) {
-        String line = "Test 15 lqlq 35 bad 99999 guess 34";
-        String s = "30 + 40 + 20 + 40 + 20 + 50 + 11 + -6  + -100";
-        // s["Test" "15" "lqlq" "35" "bad" "99999" "guess" "34"]
-        // s["15" "35" "99999" "34"]
-        // s[15 35 99999 34]
-        // 100083
+        new 사람();
+    }
+}
 
-//        int sum = Arrays
-//                .stream(line.split(" "))
-//                .filter((s) -> s.matches("\\d+"))
-//                .mapToInt(Integer::parseInt)
-//                .sum();
+class 동물 {
+    동물(String 이름) {
+        System.out.println("동물(String 이름) 실행됨!");
+        System.out.println("이름 : " + 이름);
+    }
+    동물(String 이름, int 나이) {
+        System.out.println("동물(String 이름, int 나이) 실행됨!");
+        System.out.println("이름 : " + 이름);
+        System.out.println("나이 : " + 나이);
+    }
+}
 
-        int sum1 = Arrays.stream(s.split(" "))
-                .filter((ss) -> ss.matches("\\d+")||ss.matches("-\\d+"))
-                .mapToInt(Integer::parseInt)
-                .sum();
-
-        int sum = 0;
-        String[] str = line.split(" ");
-        for(int i = 0 ; i < str.length ; i++){
-            if(str[i].matches("\\d+|-\\d+")){
-                sum += Integer.parseInt(str[i]);
-            }
-        }
-
-
-        System.out.println(sum);
-        System.out.println("sum1 = " + sum1);
+class 사람 extends 동물 {
+    사람(){
+        super("홍길동",22);
     }
 }
