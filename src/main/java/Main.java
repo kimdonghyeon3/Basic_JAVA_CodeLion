@@ -1,30 +1,70 @@
-//code.oa.gg/java8/938
-// 문제 : 아래와 같이 출력되도록 해주세요. init() 메세드에 의해서 출력되어야 합니다.
-// 조건 : 사람 클래스의 생성자는 사용할 수 없습니다.
-// 힌트 : 모든 생성자는 자신의 일을 하기 전에 super(); 부터 실행합니다.
-// 힌트 : 모든 생성자는 자신의 일을 하기 전에 부모클래스의 생성자 부터 실행합니다.
+// 문제 : 아래와 같이 출력 되도록 전사A, 전사B를 만들어주세요.
+// 조건 : this와 super를 활용해주세요.
 
 class Main {
     public static void main(String[] args) {
-        new 사람();
-        // 출력 : 사람이 초기화 됩니다.
+        전사A a전사A = new 전사A();
+        a전사A.이름 = "홍길동";
+
+        System.out.println("== 전사A 공격(); ==");
+        a전사A.공격();
+        // 출력
+        // 홍길동이(가) 공격!
+        // 사람이(가) 숨쉬다.
+
+        System.out.println("\n== 전사A 공격2(); ==");
+        a전사A.공격2();
+        // 홍길동이(가) 공격!
+        // 사람이(가) 숨쉬다.
+
+        전사B a전사B = new 전사B();
+        a전사B.이름 = "홍길순";
+
+        System.out.println("\n== 전사B 공격(); ==");
+        a전사B.공격();
+        // 홍길순이(가) 공격!
+        // 전사B가 숨쉬다.
+
+        System.out.println("\n== 전사B 공격2(); ==");
+        a전사B.공격2();
+        // null이(가) 공격!
+        // 사람이(가) 숨쉬다.
     }
 }
 
-class 동물 {
+class 사람 {
+    String 이름;
 
-    동물(){
-        init();
-    }
-
-    void init() {
-
+    void 숨쉬다() {
+        System.out.println("사람이 숨쉬다.");
     }
 }
 
-class 사람 extends 동물 {
+class 전사 extends 사람{
+    void 공격(){
+        System.out.println(이름 + "이 공격!!");
+        숨쉬다();
+    }
+    void 공격2() {
+        System.out.println(이름 + "이 공격!!");
+        super.숨쉬다();
+    }
+}
 
-    void init() {
-        System.out.println("사람이 초기화 됩니다.");
+class 전사A extends 전사{
+
+}
+
+class 전사B extends 전사{
+
+    String 이름;
+
+    void 공격(){
+        System.out.println(이름 + "이 공격!!");
+        숨쉬다();
+    }
+
+    void 숨쉬다() {
+        System.out.println("전사B가 숨쉬다.");
     }
 }
