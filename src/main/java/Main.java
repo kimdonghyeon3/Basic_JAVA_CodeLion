@@ -1,16 +1,13 @@
-//code.oa.gg/java8/958
+//code.oa.gg/java8/970
 // 가정 : 우리는 오라클 자바 개발팀에 취업을 했습니다. 우리는 자바 10의 새로운 기능은 `저장소` 클래스를 만들어야 합니다.
-// 다음 코드가 오류없이 진행되도록 해주세요. 오류만 안나면 됩니다.
+// 문제 : `저장` 메서드를 1개로 줄여보세요.
 
 class Main {
     public static void main(String[] args) {
-        저장소.저장(10);
-        저장소.저장("안녕");
-        저장소.저장(new 사람());
         저장소.저장(new 사과());
-        저장소.저장(5.5);
-        저장소.저장(false);
-        저장소.저장('a');
+        저장소.저장(new 사람());
+        저장소.저장("안녕"); // "안녕" 은 String 클래스의 객체이다.
+        저장소.저장(new String("안녕"));
 
         // 정수 계열
         byte b = 0; // 1바이트
@@ -28,6 +25,11 @@ class Main {
         // 논리 계열
         boolean bl = false; // 1/8 바이트, 1비트
 
+        // int 형 변수 i의 값 `3`을 객체화 하는 방법
+        Integer iObj = new Integer(i);
+        // iObj 리모콘에 연결된 객체에는 3이라는 값이 있습니다.
+        // 객체 안에 3이있다고 생각하시면 됩니다.
+
         저장소.저장(b);
         저장소.저장(s);
         저장소.저장(c);
@@ -38,43 +40,23 @@ class Main {
         저장소.저장(bl);
     }
 }
+
 class 저장소 {
-    static void 저장(byte v) {
-    }
+//    static void 저장(double v) {
+//        System.out.println("double 값 : " + v);
+//    }
+//
+//    static void 저장(boolean v) {
+//        System.out.println("boolean 값 : " + v);
+//    }
 
-    static void 저장(short v) {
+    static void 저장(Object v) {
+        System.out.println("Object 값 : " + v);
     }
-
-    static void 저장(char v) {
-    }
-
-    static void 저장(int v) {
-    }
-
-    static void 저장(long v) {
-    }
-
-    static void 저장(float v) {
-    }
-
-    static void 저장(double v) {
-    }
-
-    static void 저장(boolean v) {
-    }
-
-    static void 저장(사과 v) {
-    }
-
-    static void 저장(사람 v) {
-    }
-
-    static void 저장(String v) {
-    }
-}
-
-class 사과 {
 }
 
 class 사람 {
+}
+
+class 사과 {
 }
