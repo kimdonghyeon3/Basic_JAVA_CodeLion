@@ -2,61 +2,36 @@
 // 가정 : 우리는 오라클 자바 개발팀에 취업을 했습니다. 우리는 자바 10의 새로운 기능은 `저장소` 클래스를 만들어야 합니다.
 // 문제 : `저장` 메서드를 1개로 줄여보세요.
 
-class Main {
+public class Main {
+
     public static void main(String[] args) {
-        저장소.저장(new 사과());
-        저장소.저장(new 사람());
-        저장소.저장("안녕"); // "안녕" 은 String 클래스의 객체이다.
-        저장소.저장(new String("안녕"));
+        Thing thing = new Thing();
+        Person person = new Person();
+        Apple apple = new Apple();
 
-        // 정수 계열
-        byte b = 0; // 1바이트
-        char c = 1; // 2바이트
-        short s = 2; // 2바이트
-        int i = 3; // 4바이트
-        long l = 4; // 8바이트
+        Integer a = 10;
+        Integer b = 10;
 
-        // 실수 계열
-        // 4.1f => float 형 실수를 의미
-        float f = 3.14f; // 4바이트
-        // 3.141592 => double 형 실수를 의미
-        double d = 3.141592; // 8 바이트
+        String str1 = "abc";
+        String str2 = "abc";
+        
+        System.out.println("thing instanceof Thing = " + (thing instanceof Thing));
+        System.out.println("person instanceof Thing = " + (person instanceof Thing));
+        System.out.println("apple instanceof Thing = " + (apple instanceof Thing));
 
-        // 논리 계열
-        boolean bl = false; // 1/8 바이트, 1비트
+        System.out.println("(thing instanceof Person) = " + (thing instanceof Person));
+        System.out.println("(thing instanceof Apple) = " + (thing instanceof Apple));
 
-        // int 형 변수 i의 값 `3`을 객체화 하는 방법
-        Integer iObj = new Integer(i);
-        // iObj 리모콘에 연결된 객체에는 3이라는 값이 있습니다.
-        // 객체 안에 3이있다고 생각하시면 됩니다.
+        System.out.println("(a==b) = " + (a==b));
+        System.out.println("(a.equals(b)) = " + (a.equals(b)));
 
-        저장소.저장(b);
-        저장소.저장(s);
-        저장소.저장(c);
-        저장소.저장(i);
-        저장소.저장(l);
-        저장소.저장(f);
-        저장소.저장(d);
-        저장소.저장(bl);
+        System.out.println("(str1 == str2) = " + (str1 == str2));
+        System.out.println("(str1.equals(str2)) = " + (str1.equals(str2)));
     }
 }
 
-class 저장소 {
-//    static void 저장(double v) {
-//        System.out.println("double 값 : " + v);
-//    }
-//
-//    static void 저장(boolean v) {
-//        System.out.println("boolean 값 : " + v);
-//    }
+class Thing{ }
+class Person extends Thing { }
+class Apple extends Thing { }
 
-    static void 저장(Object v) {
-        System.out.println("Object 값 : " + v);
-    }
-}
 
-class 사람 {
-}
-
-class 사과 {
-}
