@@ -4,6 +4,7 @@ class Main {
         ar.add(100);
         ar.add(200);
         ar.add(300);
+        ar.add(400);
 
         int value = ar.get(0);
         System.out.println(value);
@@ -16,28 +17,37 @@ class Main {
         value = ar.get(2);
         System.out.println(value);
         // 출력 : 300
+
+        value = ar.get(3);
+        System.out.println(value);
+        // 출력 : 400
     }
 }
 
-
-
 class ArrayList {
-
-    int[] data;
-    int index;
+    int[] datas;
+    int lastIndex = 0;
 
     ArrayList() {
-        data = new int[3];
-        index = 0;
+        datas = new int[3]; // 이 부분은 수정할 수 없습니다.
     }
-
 
     void add(int data) {
-        this.data[index++] = data;
+
+        if(lastIndex >= datas.length){
+            int[] newData = new int[datas.length + 1];
+
+            for(int i = 0 ; i < datas.length ; i++){
+                newData[i] = datas[i];
+            }
+
+            datas = newData;
+        }
+
+        datas[lastIndex++] = data;
     }
 
-    int get(int index){
-
-        return data[index];
+    int get(int index) {
+        return datas[index];
     }
 }
