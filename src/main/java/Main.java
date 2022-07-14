@@ -69,72 +69,40 @@ class Main {
 }
 
 class ArrayList {
-    int[] datas;
-    int lastIndex = 0;
+    private Integer[] datas;
 
     ArrayList() {
-        datas = new int[lastIndex]; // 이 부분은 수정할 수 없습니다.
+        datas = new Integer[0];
     }
 
-    void add(int data, int index){
+    public void add(int data, int index){
 
-        //그냥 추가
+        Integer[] newData = new Integer[datas.length + 1];
 
-        //그냥 추가 (크기 늘려서)
-
-        //밀리기
-
-
-        if(index >= datas.length){
-            add(data);
-        }else{
-
-            if(datas[index] == 0){
-                datas[index] = data;
-                lastIndex++;
-            }else{
-
-                int[] newData = new int[datas.length + 1];
-
-                int j = 0;
-                for(int i = 0 ; i < newData.length ; i++){
-
-                    if(i == index){
-                        newData[i] = data;
-                    }else{
-                        newData[i] = datas[j++];
-                    }
-
-                }
-
-                System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
-                datas = newData;
-            }
-        }
-
-
-
-
-    }
-
-    void add(int data) {
-
-        if(lastIndex >= datas.length){
-            int[] newData = new int[datas.length + 1];
-
+        if(index == datas.length){
             for(int i = 0 ; i < datas.length ; i++){
                 newData[i] = datas[i];
             }
-
-            System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
-
-            datas = newData;
+            newData[newData.length-1] = data;
+        }else{
+                int j = 0;
+                for(int i = 0 ; i < newData.length ; i++){
+                    if(i == index){
+                        newData[i] = data;
+                        continue;
+                    }
+                    newData[i] = datas[j++];
+                }
         }
-
-        datas[lastIndex++] = data;
+        System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
+        datas = newData;
     }
 
-    Integer get(int index) {
+    public void add(int data) {
+        add(data, datas.length);
+    }
+
+    public Integer get(int index) {
         return datas[index];
     }
 
@@ -143,32 +111,18 @@ class ArrayList {
     }
 
     public void remove(int index) {
-        int[] newData = new int[datas.length - 1];
-
+        Integer[] newData = new Integer[datas.length - 1];
         int j = 0;
         for(int i = 0 ; i < datas.length ; i++){
             if(i != index) {
                 newData[j++] = datas[i];
             }
         }
-
-        lastIndex--;
         datas = newData;
-
     }
 
     public void removeAt(int index) {
-        int[] newData = new int[datas.length - 1];
-
-        int j = 0;
-        for(int i = 0 ; i < datas.length ; i++){
-            if(i != index) {
-                newData[j++] = datas[i];
-            }
-        }
-
-        lastIndex--;
-        datas = newData;
+        remove(index);
     }
 
     public void showAllValues() {
