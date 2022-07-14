@@ -1,27 +1,70 @@
 class Main {
     public static void main(String[] args) {ArrayList ar = new ArrayList();
-        ar.add(100, 0);
-        ar.add(200, 1);
-        ar.add(300, 2);
-        ar.add(400, 3);
-        ar.add(500, 4);
-        ar.add(600, 2); // 2번좌석으로 새치기, 기존의 2번좌석 손님부터 끝 손님까지 뒤로 한칸씩 밀린다.
-        ar.add(700, 0); // 0번좌석으로 새치기, 기존의 0번좌석 손님부터 끝 손님까지 뒤로 한칸씩 밀린다.
+        ArrayList al = new ArrayList();
 
-        for ( int i = 0; i < ar.size(); i++ ) {
-            int value = ar.get(i);
+        System.out.println("al.size() : " + al.size());
+        // 출력 => al.size() : 0
 
-            System.out.println(i + " : " + value);
-        }
+        al.add(100);
 
-        // 출력
-        // 0 : 700
-        // 1 : 100
-        // 2 : 200
-        // 3 : 600
-        // 4 : 300
-        // 5 : 400
-        // 6 : 500
+        System.out.println("al.get(0) : " + al.get(0));
+        // 출력 => al.get(0) : 100
+
+        al.add(200);
+        al.add(300);
+        // 출력 => 배열의 크기가 증가되었습니다. 2 => 4
+
+        System.out.println("al.size() : " + al.size());
+        // 출력 => al.size() : 3
+
+        System.out.println("al.get(1) : " + al.get(1));
+        // 출력 => al.get(1) : 200
+
+        al.removeAt(1);
+
+        System.out.println("al.size() : " + al.size());
+        // 출력 => al.size() : 2
+
+        System.out.println("al.get(1) : " + al.get(1));
+        // 출력 => al.get(1) : 300
+
+        al.add(400);
+        al.add(500);
+        al.add(600);
+        // 출력 => 배열의 크기가 증가되었습니다. 4 => 8
+
+        System.out.println("al.get(3) + al.get(4) : " + (al.get(3) + al.get(4)));
+        // 출력 => al.get(3) + al.get(4) : 1100
+
+        System.out.println("al.get(3).intValue() + al.get(4).intValue() : " + (al.get(3).intValue() + al.get(4).intValue()));
+        // 출력 => al.get(3) + al.get(4) : 1100
+
+        al.showAllValues();
+        // 출력 =>
+		/*
+		== 전체 데이터 출력 ==
+		0 : 100
+		1 : 300
+		2 : 400
+		3 : 500
+		4 : 600
+		*/
+
+        al.add(700, 1);
+        al.add(750, 1);
+
+        al.showAllValues();
+        // 출력 =>
+		/*
+		== 전체 데이터 출력 ==
+		0 : 100
+		1 : 750
+		2 : 700
+		3 : 300
+		4 : 400
+		5 : 500
+		6 : 600
+		*/
     }
 }
 
@@ -30,7 +73,7 @@ class ArrayList {
     int lastIndex = 0;
 
     ArrayList() {
-        datas = new int[3]; // 이 부분은 수정할 수 없습니다.
+        datas = new int[lastIndex]; // 이 부분은 수정할 수 없습니다.
     }
 
     void add(int data, int index){
@@ -64,6 +107,7 @@ class ArrayList {
 
                 }
 
+                System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
                 datas = newData;
             }
         }
@@ -82,13 +126,15 @@ class ArrayList {
                 newData[i] = datas[i];
             }
 
+            System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
+
             datas = newData;
         }
 
         datas[lastIndex++] = data;
     }
 
-    int get(int index) {
+    Integer get(int index) {
         return datas[index];
     }
 
@@ -109,5 +155,26 @@ class ArrayList {
         lastIndex--;
         datas = newData;
 
+    }
+
+    public void removeAt(int index) {
+        int[] newData = new int[datas.length - 1];
+
+        int j = 0;
+        for(int i = 0 ; i < datas.length ; i++){
+            if(i != index) {
+                newData[j++] = datas[i];
+            }
+        }
+
+        lastIndex--;
+        datas = newData;
+    }
+
+    public void showAllValues() {
+        System.out.println("== 전체 데이터 출력 ==");
+        for(int i = 0 ; i < datas.length ; i++){
+            System.out.println( i + " : " + datas[i]);
+        }
     }
 }
