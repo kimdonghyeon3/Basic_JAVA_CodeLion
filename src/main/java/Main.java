@@ -1,6 +1,6 @@
 class Main {
     public static void main(String[] args) {ArrayList ar = new ArrayList();
-        ArrayList al = new ArrayList();
+        ArrayList<Integer> al = new ArrayList<>();
 
         System.out.println("al.size() : " + al.size());
         // 출력 => al.size() : 0
@@ -68,16 +68,16 @@ class Main {
     }
 }
 
-class ArrayList {
-    private Integer[] datas;
+class ArrayList<T> {
+    private T[] datas;
 
     ArrayList() {
-        datas = new Integer[0];
+        datas = (T[])new Object[0];
     }
 
-    public void add(int data, int index){
+    public void add(T data, int index){
 
-        Integer[] newData = new Integer[datas.length + 1];
+        T[] newData = (T[]) new Object[datas.length + 1];
 
         if(index == datas.length){
             for(int i = 0 ; i < datas.length ; i++){
@@ -98,11 +98,11 @@ class ArrayList {
         datas = newData;
     }
 
-    public void add(int data) {
+    public void add(T data) {
         add(data, datas.length);
     }
 
-    public Integer get(int index) {
+    public T get(int index) {
         return datas[index];
     }
 
@@ -111,7 +111,7 @@ class ArrayList {
     }
 
     public void remove(int index) {
-        Integer[] newData = new Integer[datas.length - 1];
+        T[] newData = (T[])new Object[datas.length - 1];
         int j = 0;
         for(int i = 0 ; i < datas.length ; i++){
             if(i != index) {
