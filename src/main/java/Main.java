@@ -25,9 +25,25 @@ class HashMap {
     }
 
     void put(Object key, Object data) {
-        keys[size] = key;
-        datas[size] = data;
-        size++;
+        Object v = null;
+        int index = -1;
+
+        for ( int i = 0; i < size; i++ ) {
+            if ( key.equals(keys[i]) ) {
+                index = i;
+                break;
+            }
+        }
+
+        if ( index != -1 ) {
+            datas[index] = data;
+            v = datas[index];
+        }else{
+            keys[size] = key;
+            datas[size] = data;
+            size++;
+        }
+
     }
 
     Object get(Object key) {
