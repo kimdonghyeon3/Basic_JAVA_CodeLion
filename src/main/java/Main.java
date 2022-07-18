@@ -1,134 +1,83 @@
+//code.oa.gg/java8/1352
+// 문제 : 아래가 실행되도록 해주세요.
+
 class Main {
-    public static void main(String[] args) {ArrayList ar = new ArrayList();
-        ArrayList<Integer> al = new ArrayList<>();
+    public static void main(String[] args) {
+        ArrayList<Integer> ar1 = new ArrayList<Integer>();
 
-        System.out.println("al.size() : " + al.size());
-        // 출력 => al.size() : 0
+        ar1.add(10);
+        ar1.add(20);
+        System.out.println(ar1.get(0) + ar1.get(1));
+        // 출력 : 30
 
-        al.add(100);
+        ArrayList<Boolean> ar2 = new ArrayList<Boolean>();
 
-        System.out.println("al.get(0) : " + al.get(0));
-        // 출력 => al.get(0) : 100
-
-        al.add(200);
-        al.add(300);
-        // 출력 => 배열의 크기가 증가되었습니다. 2 => 4
-
-        System.out.println("al.size() : " + al.size());
-        // 출력 => al.size() : 3
-
-        System.out.println("al.get(1) : " + al.get(1));
-        // 출력 => al.get(1) : 200
-
-        al.removeAt(1);
-
-        System.out.println("al.size() : " + al.size());
-        // 출력 => al.size() : 2
-
-        System.out.println("al.get(1) : " + al.get(1));
-        // 출력 => al.get(1) : 300
-
-        al.add(400);
-        al.add(500);
-        al.add(600);
-        // 출력 => 배열의 크기가 증가되었습니다. 4 => 8
-
-        System.out.println("al.get(3) + al.get(4) : " + (al.get(3) + al.get(4)));
-        // 출력 => al.get(3) + al.get(4) : 1100
-
-        System.out.println("al.get(3).intValue() + al.get(4).intValue() : " + (al.get(3).intValue() + al.get(4).intValue()));
-        // 출력 => al.get(3) + al.get(4) : 1100
-
-        al.showAllValues();
-        // 출력 =>
-		/*
-		== 전체 데이터 출력 ==
-		0 : 100
-		1 : 300
-		2 : 400
-		3 : 500
-		4 : 600
-		*/
-
-        al.add(700, 1);
-        al.add(750, 1);
-
-        al.showAllValues();
-        // 출력 =>
-		/*
-		== 전체 데이터 출력 ==
-		0 : 100
-		1 : 750
-		2 : 700
-		3 : 300
-		4 : 400
-		5 : 500
-		6 : 600
-		*/
+        ar2.add(true);
+        ar2.add(true);
+        if ( ar2.get(0) && ar2.get(1) ) {
+            System.out.println("둘다 참 입니다.");
+        }
+        // 출력 : 둘다 참 입니다.
     }
 }
 
-class ArrayList<T> {
-    private T[] datas;
+class ArrayList <T> {
+    Object[] datas;
+    int lastIndex = -1;
 
     ArrayList() {
-        datas = (T[])new Object[0];
+        datas = new Object[3]; // 이 부분은 수정할 수 없습니다.
     }
 
-    public void add(T data, int index){
+    void add(Object data, int index) {
+        lastIndex++;
+        extendDatasSizeIfNeed();
 
-        T[] newData = (T[]) new Object[datas.length + 1];
+        // 구현시작
+        // 맨 뒤의 손님을 끝쪽으로 한칸 이동시킨다.
+        // 맨 뒤에서 2번째 손님을 끝쪽으로 한칸 이동시킨다.
+        // 맨 뒤에서 3번째 손님을 끝쪽으로 한칸 이동시킨다.
+        // 맨 뒤에서 index번째 손님을 끝쪽으로 한칸 이동시킨다.
+        for ( int i = lastIndex - 1; i > index - 1; i-- ) {
+            datas[i + 1] = datas[i];
+        }
 
-        if(index == datas.length){
-            for(int i = 0 ; i < datas.length ; i++){
-                newData[i] = datas[i];
+        // 구현끝
+
+        datas[index] = data;
+    }
+
+    void add(Object data) {
+        lastIndex++;
+
+        extendDatasSizeIfNeed();
+
+        datas[lastIndex] = data;
+    }
+
+    void extendDatasSizeIfNeed() {
+        if ( lastIndex >= datas.length ) {
+            // 확장공사
+            // 기존버스 버리고 새 버스로 연결!!
+            // datas 이 녀석이 기존 버스를 버리고 새 버스를 가리켜야 합니다.
+
+            // 새 버스 생성
+            Object[] newArr = new Object[datas.length * 2];
+
+            // 기존 버스(배열)를 버리기 전에 버스에 있던 승객들을 새 버스로 옮긴다.
+            for ( int i = 0; i < datas.length; i++ ) {
+                newArr[i] = datas[i];
             }
-            newData[newData.length-1] = data;
-        }else{
-                int j = 0;
-                for(int i = 0 ; i < newData.length ; i++){
-                    if(i == index){
-                        newData[i] = data;
-                        continue;
-                    }
-                    newData[i] = datas[j++];
-                }
+
+            datas = newArr;
         }
-        System.out.println("배열의 크기가 증가되었습니다. " + datas.length + " => " + newData.length);
-        datas = newData;
     }
 
-    public void add(T data) {
-        add(data, datas.length);
+    T get(int index) {
+        return (T) datas[index];
     }
 
-    public T get(int index) {
-        return datas[index];
-    }
-
-    public int size() {
-        return datas.length;
-    }
-
-    public void remove(int index) {
-        T[] newData = (T[])new Object[datas.length - 1];
-        int j = 0;
-        for(int i = 0 ; i < datas.length ; i++){
-            if(i != index) {
-                newData[j++] = datas[i];
-            }
-        }
-        datas = newData;
-    }
-
-    public void removeAt(int index) {
-        remove(index);
-    }
-
-    public void showAllValues() {
-        System.out.println("== 전체 데이터 출력 ==");
-        for(int i = 0 ; i < datas.length ; i++){
-            System.out.println( i + " : " + datas[i]);
-        }
+    int size() {
+        return lastIndex + 1;
     }
 }
