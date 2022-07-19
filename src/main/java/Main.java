@@ -1,29 +1,39 @@
 class Main {
+
+    static long num = 1600851475143L;
+
     public static void main(String[] args) {
-
         //속도를 빠르게 하려면 dp를 사용하는 것도 좋아보인다
-        int sum = 0;
+        long max = Long.MIN_VALUE;
 
-        for(int i = 0 ; true ; i++){
-            int fiboNum = fibo(i);
+        for (int i = 2; i <= num ; i++) {
+            while (num % i == 0) {
+//                System.out.println("약수 = " + i);
+                num /= i;
 
-            if(fiboNum > 50000000)
-                break;
-
-            if(fiboNum % 2 == 0)
-                sum += fiboNum;
-
-//            System.out.println("fibo(i) = " + fiboNum);
+                if(isPrime(i)){
+//                    System.out.println("약수 중 소수인 것 = " + i);
+                    max = Math.max(max, i);
+                }
+            }
         }
 
-        System.out.println("sum = " + sum);
+
+        System.out.println("max = " + ((max == Long.MIN_VALUE) ? "소인수가 없습니다.":max));
+
     }
 
-    public static int fibo(int n){
+    public static boolean isPrime(int n){
 
-        if(n == 1 || n==0)
-            return n == 1 ? 1 : 0;
+        if(n == 1)
+            return false;
 
-        return fibo(n-1) + fibo(n-2);
+        for(int i = 2 ; i <= Math.sqrt(n) ; i++){
+            if( n % i == 0){
+                return false;
+            }
+        }
+
+        return true;
     }
 }
