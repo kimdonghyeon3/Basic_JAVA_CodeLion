@@ -1,39 +1,31 @@
 class Main {
 
-    static long num = 1600851475143L;
-
     public static void main(String[] args) {
-        //속도를 빠르게 하려면 dp를 사용하는 것도 좋아보인다
-        long max = Long.MIN_VALUE;
 
-        for (int i = 2; i <= num ; i++) {
-            while (num % i == 0) {
-//                System.out.println("약수 = " + i);
-                num /= i;
+        long result = 0;
 
-                if(isPrime(i)){
-//                    System.out.println("약수 중 소수인 것 = " + i);
-                    max = Math.max(max, i);
+        out : for(int i = 9999 ; i > 999 ; i--){
+            for(int j = 9999 ; j > 999 ; j--){
+                if(isSymmetry(i*j)){
+                    result = Math.max(result, i*j);
+//                    break out;    답이 나오긴 하는데,, 이건 오류가 발생할 수도 있겠다
                 }
             }
         }
 
-
-        System.out.println("max = " + ((max == Long.MIN_VALUE) ? "소인수가 없습니다.":max));
-
+        System.out.println("result = " + ((result == -1) ? "대칭수가 없습니다.": result) );
     }
 
-    public static boolean isPrime(int n){
+    public static boolean isSymmetry(long n){
 
-        if(n == 1)
-            return false;
+        String str = String.valueOf(n);
 
-        for(int i = 2 ; i <= Math.sqrt(n) ; i++){
-            if( n % i == 0){
+        for(int i = 0 ; i < str.length()/2 ; i++){
+            if(str.charAt(i) != str.charAt(str.length()-i-1)){
                 return false;
             }
         }
-
         return true;
     }
+
 }
