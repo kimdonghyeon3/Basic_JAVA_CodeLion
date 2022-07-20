@@ -19,11 +19,11 @@ class Main {
     }
 }
 class 사람{
-    static 사람 사람;
+    static 사람 사람 ;
     int id = 0;
     static int num = 1;
 
-    public 사람(int i) {
+    private 사람(int i) {
         id = i;
     }
 
