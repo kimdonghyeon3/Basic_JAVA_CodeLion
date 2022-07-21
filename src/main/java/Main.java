@@ -1,38 +1,30 @@
-//code.oa.gg/java8/1075
-// 문제 : 아래코드가 실행되도록 해주세요.
-
+/*
+문제 : Main 객체의 안녕이 Main클래스가 아닌 다른 클래스 객체에 의해 실행되도록 해주세요.
+*/
 class Main {
     public static void main(String[] args) {
-        사람[] 사람들 = new 사람[7];
-        사람들[0] = 사람.get사람();
-        사람들[1] = 사람.get사람();
-        사람들[2] = 사람.get사람();
-        사람들[3] = 사람.get사람();
-        사람들[4] = 사람.get사람();
-        사람들[5] = 사람.get사람();
-        사람들[6] = 사람.get사람();
+        Main aMain = new Main();
 
-        for ( int i = 0; i < 사람들.length; i++ ) {
-            사람들[i].자기소개();
-        }
+        실행자 a실행자 = new 실행자();
+        a실행자.set리모콘(aMain);
+        a실행자.리모콘_작동();
+    }
 
+    public void 안녕() {
+        System.out.println("Main::안녕!");
     }
 }
-class 사람{
-    static 사람 사람 ;
-    int id = 0;
-    static int num = 1;
 
-    private 사람(int i) {
-        id = i;
+class 실행자 {
+    private Object a리모콘;
+
+    public void set리모콘(Object a리모콘) {
+        this.a리모콘 = a리모콘;
     }
 
-    public static 사람 get사람() {
-        사람 = new 사람(num < 3 ? num++ : num);
-;        return 사람;
-    }
-
-    public void 자기소개() {
-        System.out.println("저는 " + id +"번째 사람입니다.");
+    public void 리모콘_작동() {
+        // 수정가능지역 시작
+        ((Main)a리모콘).안녕();
+        // 수정가능지역 끝
     }
 }
