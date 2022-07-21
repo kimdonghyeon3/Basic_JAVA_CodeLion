@@ -17,35 +17,33 @@ class Main {
 }
 class Button{
 
-    Object obj;
+    Listener obj;
 
     public void fireClick() {
-        if(obj instanceof 고양이){
-            ((고양이)obj).listen();
-        }else if(obj instanceof 개){
-            ((개)obj).listen();
-        }else if(obj instanceof 부엉이){
-            ((부엉이)obj).listen();
-        }
+        obj.listen();
     }
 
-    public void setClickEventListener(Object obj) {
+    public void setClickEventListener(Listener obj) {
         this.obj = obj;
     }
 }
 
-class 고양이{
-    void listen(){
+interface Listener{
+    void listen();
+}
+
+class 고양이 implements Listener{
+    public void listen(){
         System.out.println("나(고양이)는 방금 버튼이 클릭되었다는 사실을 전달 받았습니다.");
     }
 }
-class 개{
-    void listen(){
+class 개 implements Listener{
+    public void listen(){
         System.out.println("나(개)는 방금 버튼이 클릭되었다는 사실을 전달 받았습니다.");
     }
 }
-class 부엉이{
-    void listen(){
+class 부엉이 implements Listener{
+    public void listen(){
         System.out.println("나(부엉이)는 방금 버튼이 클릭되었다는 사실을 전달 받았습니다.");
     }
 }
