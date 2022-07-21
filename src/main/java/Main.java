@@ -1,30 +1,40 @@
 /*
-문제 : Main 객체의 안녕이 Main클래스가 아닌 다른 클래스 객체에 의해 실행되도록 해주세요.
+문제 : 사람 객체의 `안녕`이 `button.click();`에 의해 실행되도록 해주세요.
+조건 : Button에는 `사람` 이라는 언급이 없어야 합니다.
 */
 class Main {
     public static void main(String[] args) {
-        Main aMain = new Main();
-
-        실행자 a실행자 = new 실행자();
-        a실행자.set리모콘(aMain);
-        a실행자.리모콘_작동();
-    }
-
-    public void 안녕() {
-        System.out.println("Main::안녕!");
+        Button button = new Button();
+        // button.?? // 이 1줄을 완성해주세요.(메인 클래스는 여기만 수정 가능)
+        button.setButton(new 사람());
+        button.click();
     }
 }
 
-class 실행자 {
-    private Object a리모콘;
+interface Listener{
+    void listen();
+}
 
-    public void set리모콘(Object a리모콘) {
-        this.a리모콘 = a리모콘;
+class Button{
+
+    Listener obj;
+
+    public void setButton(Listener listen) {
+        this.obj = listen;
     }
 
-    public void 리모콘_작동() {
-        // 수정가능지역 시작
-        ((Main)a리모콘).안녕();
-        // 수정가능지역 끝
+    void click(){
+        obj.listen();
+    }
+}
+
+class 사람 implements Listener{
+    public void 안녕() {
+        System.out.println("Main::안녕!");
+    }
+
+    @Override
+    public void listen() {
+        안녕();
     }
 }
