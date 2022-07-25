@@ -3,14 +3,13 @@ class Main {
         View.OnClickListener aOnClickListener;
 
         // 수정가능지역 시작
-        class 리스너1 implements View.OnClickListener {
+        aOnClickListener = new View.OnClickListener(){
+
             @Override
             public void onClick() {
-                System.out.println("클릭되었다는 사실을 전달받았습니다.");
+                System.out.println("눌렸습니다.");
             }
-        }
-
-        aOnClickListener = new 리스너1();
+        };
         // 수정가능지역 끝
 
         aOnClickListener.onClick();
