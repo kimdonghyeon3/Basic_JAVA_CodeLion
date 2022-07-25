@@ -1,25 +1,43 @@
 class Main {
     public static void main(String[] args) {
-        View.OnClickListener aOnClickListener;
+        계산기 a계산기 = new 계산기();
+        a계산기.num1 = 10;
+        a계산기.num2 = 20;
 
-        // 수정가능지역 시작
-        aOnClickListener = new View.OnClickListener(){
-
+        int 결과1 = a계산기.수행(new 식(){
             @Override
-            public void onClick() {
-                System.out.println("눌렸습니다.");
+            public int 실행(int num1, int num2) {
+                return num1 + num2;
             }
-        };
-        // 수정가능지역 끝
+        });
+        System.out.println(결과1); // 30
 
-        aOnClickListener.onClick();
-        // 출력 => 클릭되었다는 사실을 전달받았습니다.
+        int 결과2 = a계산기.수행(new 식(){
+            @Override
+            public int 실행(int num1, int num2) {
+                return num1 - num2;
+            }
+        });
+        System.out.println(결과2); // -10
+
+        int 결과3 = a계산기.수행(new 식(){
+            @Override
+            public int 실행(int num1, int num2) {
+                return num1 * num2;
+            }
+        });
+        System.out.println(결과3); // 300
+    }
+}
+class 계산기 {
+    int num1;
+    int num2;
+
+    int 수행(식 a식) {
+        return a식.실행(num1, num2);
     }
 }
 
-class View {
-    static interface OnClickListener {
-        public void onClick();
-    }
+interface 식 {
+    public int 실행(int num1, int num2);
 }
-
