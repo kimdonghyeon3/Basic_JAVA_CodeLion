@@ -14,8 +14,18 @@ class Main {
         // 뷰 : 그건 걱정하지 않아도 됩니다. 당신이 나에게 준 홍길동 리모콘은, 어차피 onClick 버튼 빼고 모든 버튼이 제거됩니다. 즉 리모콘 형변환이 일어납니다.
         // 뷰 : 대신 당신 해야할 일은, OnClickEventListen가 되어야 한다는 것 입나다.
         // 홍길동 : 그럴줄 알고 그것(OnClickEventListen) 구현했습니다.
-        aButton.addOnClickListener(new 홍길동());
-        aButton.addOnClickListener(new 홍길순());
+        aButton.addOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(String msg) {
+                System.out.println("홍길동이 받은 메세지 : " + msg);
+            }
+        });
+        aButton.addOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(String msg) {
+                System.out.println("홍길순이 받은 메세지 : " + msg);
+            }
+        });
         aButton.fireClickEvent();
         aButton.fireClickEvent();
     }
@@ -43,22 +53,4 @@ class Button extends View {
 
 interface OnClickListener {
     public void onClick(String msg);
-}
-
-class 홍길동 implements OnClickListener {
-    @Override
-    public void onClick(String msg) {
-        System.out.println("홍길동이 받은 메세지 : " + msg);
-    }
-
-    public void 숨쉬다() {
-        System.out.println("홍길동 : 숨쉬다.");
-    }
-}
-
-class 홍길순 implements OnClickListener {
-    @Override
-    public void onClick(String msg) {
-        System.out.println("홍길순이 받은 메세지 : " + msg);
-    }
 }
