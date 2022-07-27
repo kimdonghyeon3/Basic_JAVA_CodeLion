@@ -1,19 +1,28 @@
-//code.oa.gg/java8/1416
 
 class Main {
     public static void main(String[] args) {
         Activity activity = new MainActivity();
         activity.onCreate();
-        // 출력 => 메인 액티비티가 실행되었습니다.
     }
 }
 
-class Activity{
-    void onCreate(){
+abstract class Activity {
+    abstract public void onCreate();
+}
+
+class MainActivity extends Activity {
+    @Override
+    public void onCreate() {
         System.out.println("메인 액티비티가 실행되었습니다.");
+
+        View.OnClickListener a; // 이 코드가 실행되도록 해주세요.
     }
 }
 
-class MainActivity extends Activity{
+class View{
+    class OnClickListener{
 
+    }
 }
+
+
