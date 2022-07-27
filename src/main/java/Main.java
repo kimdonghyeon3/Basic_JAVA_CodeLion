@@ -15,14 +15,35 @@ class MainActivity extends Activity {
     public void onCreate() {
         System.out.println("메인 액티비티가 실행되었습니다.");
 
-        View.OnClickListener a; // 이 코드가 실행되도록 해주세요.
+        // 아래 코드가 실행되도록 해주세요.
+        View.OnClickListener a = new 사과();
+        View aButton = new Button(this);
+        aButton.setOnClickListener(a);
     }
 }
 
-class View{
-    class OnClickListener{
+abstract class View {
+    public void setOnClickListener(OnClickListener a) {
+    }
 
+    static interface OnClickListener {
     }
 }
+
+class 사과 implements View.OnClickListener{
+
+}
+
+class Button extends View{
+    Activity a;
+
+    public Button(Activity a) {
+        this.a = a;
+    }
+}
+
+
+
+
 
 
